@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, IsArray } from 'class-validator';
 
 export class CreateWorkoutDto {
   @IsNotEmpty()
@@ -8,4 +8,9 @@ export class CreateWorkoutDto {
   @IsNotEmpty()
   @IsString()
   description: string;
+}
+
+export class WorkoutExercisesDto {
+  @IsArray()
+  exercises: string[];
 }

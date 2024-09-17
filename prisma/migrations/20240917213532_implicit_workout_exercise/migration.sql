@@ -1,17 +1,14 @@
 /*
   Warnings:
 
-  - You are about to drop the `WorkoutExercises` table. If the table is not empty, all the data it contains will be lost.
+  - You are about to drop the column `workoutId` on the `Exercises` table. All the data in the column will be lost.
 
 */
 -- DropForeignKey
-ALTER TABLE "WorkoutExercises" DROP CONSTRAINT "WorkoutExercises_exerciseId_fkey";
+ALTER TABLE "Exercises" DROP CONSTRAINT "Exercises_workoutId_fkey";
 
--- DropForeignKey
-ALTER TABLE "WorkoutExercises" DROP CONSTRAINT "WorkoutExercises_workoutId_fkey";
-
--- DropTable
-DROP TABLE "WorkoutExercises";
+-- AlterTable
+ALTER TABLE "Exercises" DROP COLUMN "workoutId";
 
 -- CreateTable
 CREATE TABLE "_ExerciseToWorkout" (

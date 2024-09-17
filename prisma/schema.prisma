@@ -18,7 +18,7 @@ model Workout {
   name        String @unique
   description String
 
-  exercises WorkoutExercises[]
+  exercises Exercise[]
 
   @@map("Workouts")
 }
@@ -33,17 +33,7 @@ model Exercise {
   secondaryMuscles String[]
   instructions     String[]
 
-  workouts WorkoutExercises[]
+  workouts Workout[]
 
   @@map("Exercises")
-}
-
-model WorkoutExercises {
-  workoutId String
-  workout   Workout @relation(fields: [workoutId], references: [id])
-
-  exerciseId String
-  exercise   Exercise @relation(fields: [exerciseId], references: [id])
-
-  @@id([workoutId, exerciseId])
 }
