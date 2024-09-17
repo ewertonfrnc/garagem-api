@@ -13,16 +13,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       String @id @default(uuid()) @db.VarChar(36)
-  name     String
-  email    String @unique
-  password String
+model Workout {
+  id          String @id @default(uuid()) @db.VarChar(36)
+  name        String @unique
+  description String
 
-  @@map("Users")
+  exercises WorkoutExercises[]
+
+  @@map("Workouts")
 }
 
-model Exercice {
+model Exercise {
   id               String   @id @default(uuid()) @db.VarChar(36)
   name             String
   target           String
@@ -31,4 +32,18 @@ model Exercice {
   equipment        String
   secondaryMuscles String[]
   instructions     String[]
+
+  workouts WorkoutExercises[]
+
+  @@map("Exercises")
+}
+
+model WorkoutExercises {
+  workoutId String
+  workout   Workout @relation(fields: [workoutId], references: [id])
+
+  exerciseId String
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+
+  @@id([workoutId, exerciseId])
 }

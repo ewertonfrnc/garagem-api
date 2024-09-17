@@ -20985,10 +20985,15 @@ export class ExercisesService {
   constructor(private prisma: PrismaService) {}
 
   async createBatch(): Promise<number> {
-    const exercicesCount = await this.prisma.exercice.createMany({
+    const exercicesCount = await this.prisma.exercise.createMany({
       data: EXERCICES,
     });
 
     return exercicesCount.count;
+  }
+
+  async findAll() {
+    const exercices = await this.prisma.exercise.findMany();
+    return { status: 'success', data: { exercices } };
   }
 }

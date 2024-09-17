@@ -1,4 +1,4 @@
-import { Controller, Post } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { ExercisesService } from './exercises.service';
 
 @Controller('exercises')
@@ -12,5 +12,10 @@ export class ExercisesController {
       status: 'success',
       exercicesCount: count,
     };
+  }
+
+  @Get()
+  findAll() {
+    return this.exercises.findAll();
   }
 }

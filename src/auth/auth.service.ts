@@ -5,7 +5,6 @@ import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../prisma/prisma.service';
 import { RegisterDto } from './dto';
 import * as bcrypt from 'bcrypt';
-import { config } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -26,20 +25,21 @@ export class AuthService {
   }
 
   async signUp(registerDTO: RegisterDto) {
-    const hash = await bcrypt.hash(registerDTO.password, 14);
-
-    const user = await this.prisma.user.create({
-      data: {
-        name: registerDTO.name,
-        email: registerDTO.email,
-        password: hash,
-      },
-    });
-
-    const token = this.signToken(user.id);
-
-    delete user.password;
-    return { status: 'success', token, data: { user } };
+    // const hash = await bcrypt.hash(registerDTO.password, 14);
+    //
+    // const user = await this.prisma.user.create({
+    //   data: {
+    //     name: registerDTO.name,
+    //     email: registerDTO.email,
+    //     password: hash,
+    //   },
+    // });
+    //
+    // const token = this.signToken(user.id);
+    //
+    // delete user.password;
+    // return { status: 'success', token, data: { user } };
+    return { status: 'success' };
   }
 
   async login() {}
