@@ -20,7 +20,7 @@ export class WorkoutsService {
         include: { exercises: true },
       });
 
-      return { status: 'success', data: { workout } };
+      return { status: 'success', data: workout };
     } catch (e) {
       return { status: 'error', error: e };
     }
@@ -28,14 +28,18 @@ export class WorkoutsService {
 
   async findAll() {
     const workouts = await this.prisma.workout.findMany({
+      orderBy: { createdAt: 'desc' },
       include: { exercises: true },
     });
 
-    return { status: 'success', data: { workouts } };
+    return { status: 'success', data: workouts };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} workout`;
+  async findOne(id: string) {
+    const workout = await this.prisma.workout.findUnique({
+      where: { id },
+    });
+    return { status: 'success', data: workout };
   }
 
   async update(id: string, updateWorkoutDto: UpdateWorkoutDto) {

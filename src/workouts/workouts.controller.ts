@@ -30,7 +30,7 @@ export class WorkoutsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.workoutsService.findOne(+id);
+    return this.workoutsService.findOne(id);
   }
 
   @Patch(':id')
